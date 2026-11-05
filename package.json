@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-blog",
+  "version": "1.0.0",
+  "description": "Blog app with JWT auth, cookies, role-based access, and multiuser support",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": [
+    "blog",
+    "express",
+    "mongodb",
+    "jwt",
+    "ejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.4.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^18.0.9",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.4"
+  }
+}

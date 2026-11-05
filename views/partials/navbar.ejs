@@ -1,0 +1,33 @@
+<%
+const onArticles = currentPath.startsWith('/articles') && currentPath !== '/articles/my' && currentPath !== '/articles/new';
+%>
+
+<header class="site-header">
+  <nav class="site-nav" data-navbar aria-label="Main navigation">
+    <a class="site-brand" href="/">
+      <span class="brand-text">Blog</span>
+    </a>
+
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
+
+    <div class="nav-links" id="primary-navigation" data-nav-links>
+      <a href="/articles" class="<%= onArticles ? 'is-active' : '' %>">Articles</a>
+
+      <% if (user) { %>
+        <a href="/articles/my" class="<%= currentPath === '/articles/my' ? 'is-active' : '' %>">My Articles</a>
+        <a href="/articles/new" class="<%= currentPath === '/articles/new' ? 'is-active' : '' %>">New Article</a>
+        <span class="nav-user">Hi, <strong><%= user.username %></strong></span>
+        <form action="/logout" method="POST" class="logout-form">
+          <button class="nav-logout" type="submit">Logout</button>
+        </form>
+      <% } else { %>
+        <a href="/login" class="<%= currentPath === '/login' ? 'is-active' : '' %>">Login</a>
+        <a href="/register" class="<%= currentPath === '/register' ? 'is-active' : '' %>">Register</a>
+      <% } %>
+    </div>
+  </nav>
+</header>

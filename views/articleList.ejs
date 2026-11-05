@@ -1,0 +1,51 @@
+<%- include('partials/head', { title: author ? author.username + "'s Articles" : 'Articles' }) %>
+
+<main class="page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Blog</p>
+      <h1><%= author ? author.username + "'s Articles" : 'All Articles' %></h1>
+      <p class="page-description"><%= author ? 'Articles written by ' + author.username + '.' : 'Browse the latest posts from the community.' %></p>
+    </div>
+
+    <div class="page-actions">
+      <% if (author) { %>
+        <a class="button button-secondary" href="/articles">View all articles</a>
+      <% } %>
+    </div>
+  </header>
+
+  <% if (articles.length === 0) { %>
+    <section class="empty-state">
+      <h2>No articles yet</h2>
+      <p><%= author ? 'This author has not published anything yet.' : 'Be the first to publish a post.' %></p>
+      <% if (user) { %>
+        <a class="button" href="/articles/new">Write the first article</a>
+      <% } else { %>
+        <a class="button" href="/register">Join and start writing</a>
+      <% } %>
+    </section>
+  <% } else { %>
+    <section class="article-list">
+      <% articles.forEach(article => { %>
+        <article class="article-card">
+          <p class="article-meta">
+            <% if (article.author) { %>
+              By <strong><%= article.author.username %></strong>
+            <% } else { %>
+              By Unknown
+            <% } %>
+            <span class="meta-divider">&middot;</span>
+            <time datetime="<%= article.createdAt.toISOString() %>"><%= article.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %></time>
+          </p>
+
+          <h2><a href="/articles/<%= article._id %>"><%= article.title %></a></h2>
+          <p class="article-excerpt"><%= article.content.length > 180 ? article.content.slice(0, 180).trim() + '...' : article.content %></p>
+          <a class="read-more" href="/articles/<%= article._id %>">Read article &rarr;</a>
+        </article>
+      <% }) %>
+    </section>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>

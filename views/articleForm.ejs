@@ -1,0 +1,34 @@
+<%- include('partials/head', { title: article ? 'Edit Article' : 'New Article' }) %>
+
+<main class="page page-narrow">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow"><%= article ? 'Editing' : 'New post' %></p>
+      <h1><%= article ? 'Edit Article' : 'Write a New Article' %></h1>
+      <p class="page-description"><%= article ? 'Update the title or content of your article.' : 'Share an idea, tutorial, or story with the community.' %></p>
+    </div>
+  </header>
+
+  <% if (error) { %>
+    <div class="alert alert-error" role="alert"><%= error %></div>
+  <% } %>
+
+  <form class="form-card" action="<%= formAction %>" method="POST">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" value="<%= values.title %>" maxlength="200" placeholder="Article title..." required>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea id="content" name="content" rows="12" placeholder="Write your content here..." required><%= values.content %></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button class="button" type="submit"><%= article ? 'Update Article' : 'Publish Article' %></button>
+      <a class="button button-secondary" href="<%= article ? '/articles/' + article._id : '/articles' %>">Cancel</a>
+    </div>
+  </form>
+</main>
+
+<%- include('partials/footer') %>

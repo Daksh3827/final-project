@@ -1,0 +1,35 @@
+<%- include('partials/head', { title: 'Login' }) %>
+
+<main class="page page-narrow">
+  <header class="page-header auth-header">
+    <div>
+      <p class="eyebrow">Welcome back</p>
+      <h1>Login</h1>
+      <p class="page-description">Sign in to publish articles and manage your stories.</p>
+    </div>
+  </header>
+
+  <% if (error) { %>
+    <div class="alert alert-error" role="alert"><%= error %></div>
+  <% } %>
+
+  <form class="form-card" action="/login" method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" autocomplete="username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required>
+    </div>
+
+    <div class="form-actions">
+      <button class="button" type="submit">Login</button>
+    </div>
+  </form>
+
+  <p class="auth-switch">New here? <a href="/register">Create an account</a></p>
+</main>
+
+<%- include('partials/footer') %>

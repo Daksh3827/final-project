@@ -1,0 +1,35 @@
+<%- include('partials/head', { title: article.title }) %>
+
+<main class="page page-narrow">
+  <article class="article-full">
+    <header class="article-header">
+      <p class="eyebrow">Article</p>
+      <h1><%= article.title %></h1>
+      <p class="article-meta">
+        By
+        <% if (article.author) { %>
+          <strong><%= article.author.username %></strong>
+        <% } else { %>
+          Unknown
+        <% } %>
+        <span class="meta-divider">&middot;</span>
+        <time datetime="<%= article.createdAt.toISOString() %>"><%= article.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %></time>
+      </p>
+
+      <% if (user && article.author && (article.author._id.toString() === user.id || user.role === 'admin')) { %>
+        <div class="article-actions">
+          <a class="button button-secondary" href="/articles/<%= article._id %>/edit">Edit</a>
+          <form action="/articles/<%= article._id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this article?');" style="display:inline;">
+            <button class="button button-danger" type="submit">Delete</button>
+          </form>
+        </div>
+      <% } %>
+    </header>
+
+    <div class="article-content"><%= article.content %></div>
+  </article>
+
+  <p class="back-link"><a href="/articles">&larr; Back to all articles</a></p>
+</main>
+
+<%- include('partials/footer') %>

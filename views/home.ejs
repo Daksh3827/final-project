@@ -1,0 +1,20 @@
+<%- include('partials/head', { title: 'Blog' }) %>
+
+<main class="page">
+  <section class="hero">
+    <p class="eyebrow">Community writing</p>
+    <h1>Stories, ideas, and tutorials from the community.</h1>
+    <p class="hero-description">Read articles from every writer or publish your own. A minimalist space to write, read, and share knowledge.</p>
+
+    <div class="hero-actions">
+      <a class="button" href="/articles">Browse articles</a>
+      <% if (user) { %>
+        <a class="button button-secondary" href="/articles/new">Write an article</a>
+      <% } else { %>
+        <a class="button button-secondary" href="/register">Join the community</a>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
